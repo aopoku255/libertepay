@@ -37,7 +37,7 @@ export const loginUser = (user, history) => async (dispatch) => {
       if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
         var finallogin = JSON.stringify(data);
         finallogin = JSON.parse(finallogin);
-        data = finallogin.user;
+        data = finallogin;
         console.log(data);
         if (finallogin.code === 200) {
           dispatch(loginSuccess(data));

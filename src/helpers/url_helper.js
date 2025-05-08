@@ -45,7 +45,7 @@ export const UPDATE_ORDER = "/apps/order";
 export const DELETE_ORDER = "/apps/order";
 
 // Customers
-export const GET_CUSTOMERS = "/apps/customer";
+export const GET_CUSTOMERS = "/auth/admin/customers";
 export const ADD_NEW_CUSTOMER = "/apps/customer";
 export const UPDATE_CUSTOMER = "/apps/customer";
 export const DELETE_CUSTOMER = "/apps/customer";

@@ -198,7 +198,7 @@ const BasicTwosVerify = () => {
                     <p className="mb-0">
                       Didn't receive a code ?{" "}
                       <Link
-                        to="/auth-pass-reset-basic"
+                        to="/forgot-password"
                         className="fw-semibold text-primary text-decoration-underline"
                       >
                         Resend

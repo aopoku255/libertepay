@@ -1,6 +1,13 @@
-import React from 'react'
-import { Card, CardBody, CardHeader, Col, Container, Row } from 'reactstrap'
-import { DefaultTable, PaginationTable, SearchTable, SortingTable, LoadingStateTable, HiddenColumns } from './ReactTable'
+import React from "react";
+import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+import {
+  DefaultTable,
+  PaginationTable,
+  SearchTable,
+  SortingTable,
+  LoadingStateTable,
+  HiddenColumns,
+} from "./ReactTable";
 
 const ReactTable = () => {
   document.title = "React Tables | Velzon - React Admin & Dashboard Template";
@@ -20,7 +27,7 @@ const ReactTable = () => {
               </Card>
             </Col>
           </Row>
-          
+
           <Row>
             <Col lg={12}>
               <Card>
@@ -84,7 +91,7 @@ const ReactTable = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default ReactTable;

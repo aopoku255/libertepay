@@ -44,6 +44,8 @@ const ProfileDropdown = () => {
   const toggleProfileDropdown = () => {
     setIsProfileDropdown(!isProfileDropdown);
   };
+
+  const firstName = useSelector((state) => state?.Login?.user?.firstname);
   return (
     <React.Fragment>
       <Dropdown
@@ -69,7 +71,7 @@ const ProfileDropdown = () => {
           </span>
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
-          <h6 className="dropdown-header">Welcome {userName}!</h6>
+          <h6 className="dropdown-header">Welcome {firstName}!</h6>
           <DropdownItem className="p-0">
             <Link
               to={process.env.PUBLIC_URL + "/profile"}

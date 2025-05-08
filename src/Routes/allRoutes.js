@@ -242,6 +242,9 @@ import ToDoList from "../pages/ToDo";
 import UiLink from "../pages/BaseUi/UiLinks/UiLinks";
 import RangeArea from "../pages/Charts/ApexCharts/RangeAreaCharts/Index";
 import FunnelCharts from "../pages/Charts/ApexCharts/FunnelCharts";
+import SMSConfig from "../pages/Pages/Profile/Settings/SMSConfig.js";
+import SettingsServices from "../pages/Pages/Profile/Settings/SettingsServices.js";
+import TermsAndConditions from "../pages/Pages/Profile/Settings/TermsAndConditions.js";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
@@ -265,7 +268,7 @@ const authProtectedRoutes = [
     path: "/apps-ecommerce-order-details",
     component: <EcommerceOrderDetail />,
   },
-  { path: "/apps-ecommerce-customers", component: <EcommerceCustomers /> },
+  { path: "/customers", component: <EcommerceCustomers /> },
   { path: "/apps-ecommerce-cart", component: <EcommerceCart /> },
   { path: "/apps-ecommerce-checkout", component: <EcommerceCheckout /> },
   { path: "/apps-ecommerce-sellers", component: <EcommerceSellers /> },
@@ -425,7 +428,10 @@ const authProtectedRoutes = [
   //Pages
   { path: "/pages-starter", component: <Starter /> },
   { path: "/pages-profile", component: <SimplePage /> },
-  { path: "/pages-profile-settings", component: <Settings /> },
+  { path: "/settings", component: <Settings /> },
+  { path: "/services", component: <SettingsServices /> },
+  { path: "/sms-provider-config", component: <SMSConfig /> },
+  { path: "/terms-and-conditions", component: <TermsAndConditions /> },
   { path: "/pages-team", component: <Team /> },
   { path: "/pages-timeline", component: <Timeline /> },
   { path: "/pages-faqs", component: <Faqs /> },

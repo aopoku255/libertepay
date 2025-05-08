@@ -16,6 +16,7 @@ const Navdata = () => {
   const [isIcons, setIsIcons] = useState(false);
   const [isMaps, setIsMaps] = useState(false);
   const [isMultiLevel, setIsMultiLevel] = useState(false);
+  const [isSettings, setIsSettings] = useState(false);
 
   //Calender
   const [isCalender, setCalender] = useState(false);
@@ -201,9 +202,9 @@ const Navdata = () => {
     // },
     {
       id: "crm",
-      label: "HOME",
+      label: "Home",
       icon: "las la-home",
-      link: "/dashboard-crm",
+      link: "/dashboard",
       parentId: "dashboard",
     },
     // {
@@ -665,7 +666,7 @@ const Navdata = () => {
     {
       id: "customers",
       label: "Customers",
-      link: "/dashboard-crm",
+      link: "/customers",
       parentId: "pages",
       icon: "las la-users",
     },
@@ -687,12 +688,97 @@ const Navdata = () => {
       parentId: "pages",
       icon: "las la-eye",
     },
+    // {
+    //   id: "settings",
+    //   label: "Settings",
+    //   link: "/settings",
+    //   parentId: "pages",
+    //   icon: "las la-cogs",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIsSettings(!isSettings);
+    //     setIscurrentState("Settings");
+    //     updateIconSidebar(e);
+    //   },
+    //   subItems: [
+    //     {
+    //       id: "sms config",
+    //       label: "SMS Provider Configuration",
+    //       link: "/settings",
+    //       isChildItem: true,
+    //     },
+    //   ],
+    // },
     {
       id: "settings",
       label: "Settings",
-      link: "/dashboard-crm",
-      parentId: "pages",
       icon: "las la-cogs",
+      link: "/#",
+      stateVariables: isDashboard,
+      click: function (e) {
+        e.preventDefault();
+        setIsDashboard(!isDashboard);
+        setIscurrentState("Dashboard");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "smsconfig",
+          label: "SMS Provider Config",
+          link: "/sms-provider-config",
+          parentId: "dashboard",
+        },
+        {
+          id: "services",
+          label: "Services",
+          link: "/services",
+          parentId: "dashboard",
+        },
+        {
+          id: "terms",
+          label: "Terms & Conditions",
+          link: "/terms-and-conditions",
+          parentId: "dashboard",
+        },
+        // {
+        //   id: "crm",
+        //   label: "CRM",
+        //   link: "/dashboard-crm",
+        //   parentId: "dashboard",
+        // },
+        // {
+        //   id: "ecommerce",
+        //   label: "Ecommerce",
+        //   link: "/dashboard",
+        //   parentId: "dashboard",
+        // },
+        // {
+        //   id: "crypto",
+        //   label: "Crypto",
+        //   link: "/dashboard-crypto",
+        //   parentId: "dashboard",
+        // },
+        // {
+        //   id: "projects",
+        //   label: "Projects",
+        //   link: "/dashboard-projects",
+        //   parentId: "dashboard",
+        // },
+        // {
+        //   id: "nft",
+        //   label: "NFT",
+        //   link: "/dashboard-nft",
+        //   parentId: "dashboard",
+        // },
+        // {
+        //   id: "job",
+        //   label: "Job",
+        //   link: "/dashboard-job",
+        //   parentId: "dashboard",
+        //   badgeName: "New",
+        //   badgeColor: "success",
+        // },
+      ],
     },
     // {
     //   id: "authentication",
