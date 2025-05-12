@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -18,32 +18,59 @@ import utility from "../../../../assets/images/utility.svg";
 import insurance from "../../../../assets/images/insurance.svg";
 import fees from "../../../../assets/images/fees.svg";
 import { Link } from "react-router-dom";
+import { getServices } from "../../../../slices/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 const SettingsServices = () => {
-  const [providers, setProviders] = useState([
-    {
-      name: "Utilities",
-      status: 1,
-      icon: utility,
-    },
-    {
-      name: "Insurance",
-      status: 0,
-      icon: insurance,
-    },
-    {
-      name: "School Fees",
-      status: 0,
-      icon: fees,
-    },
-  ]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getServices());
+  }, [dispatch]);
+
+  const selectLayoutState = (state) => state.Settings;
+  const selectLayoutProperties = createSelector(selectLayoutState, (state) => ({
+    services: state.services,
+  }));
+  // Inside your component
+  const { services } = useSelector(selectLayoutProperties);
+
+  console.log(services);
+
+  // const [providers, setProviders] = useState([
+  //   {
+  //     name: "Utilities",
+  //     status: 1,
+  //     icon: utility,
+  //   },
+  //   {
+  //     name: "Insurance",
+  //     status: 0,
+  //     icon: insurance,
+  //   },
+  //   {
+  //     name: "School Fees",
+  //     status: 0,
+  //     icon: fees,
+  //   },
+  // ]);
+
+  const [localServices, setLocalServices] = useState([]);
+
+  useEffect(() => {
+    if (services && services.length > 0) {
+      setLocalServices(services);
+    }
+  }, [services]);
 
   const handleToggle = (index) => {
-    setProviders((prev) =>
-      prev.map((provider, i) => ({
-        ...provider,
-        status: i === index ? (provider.status === 1 ? 0 : 1) : provider.status,
-      }))
+    setLocalServices((prev) =>
+      prev.map((service, i) =>
+        i === index
+          ? { ...service, status: service.status === 1 ? 0 : 1 }
+          : service
+      )
     );
   };
 
@@ -67,7 +94,7 @@ const SettingsServices = () => {
               <Card>
                 <CardBody>
                   <Row className="justify-content-center align-items-center g-3">
-                    {providers.map((provider, index) => (
+                    {localServices.map((provider, index) => (
                       <Col lg={8} key={provider.name}>
                         <Card
                           style={{ cursor: "pointer", borderRadius: "10px" }}
@@ -80,7 +107,7 @@ const SettingsServices = () => {
                                 style={{ backgroundColor: "#111E6C" }}
                               >
                                 <img
-                                  src={provider?.icon}
+                                  src={provider?.image}
                                   alt=""
                                   className="w-50"
                                 />

@@ -67,6 +67,8 @@ import JobReducer from "./jobs/reducer";
 // API Key
 import APIKeyReducer from "./apiKey/reducer";
 
+import SettingsReducer from "./settings/reducer";
+
 import {
   persistStore,
   persistReducer,
@@ -113,6 +115,7 @@ const appReducer = combineReducers({
   FileManager: FileManagerReducer,
   Todos: TodosReducer,
   Jobs: JobReducer,
+  Settings: SettingsReducer,
   APIKey: APIKeyReducer,
 });
 

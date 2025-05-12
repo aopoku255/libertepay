@@ -45,7 +45,8 @@ const ProfileDropdown = () => {
     setIsProfileDropdown(!isProfileDropdown);
   };
 
-  const firstName = useSelector((state) => state?.Login?.user?.firstname);
+  const firstName = useSelector((state) => state?.Login?.data?.data?.name);
+  const email = useSelector((state) => state?.Login?.data?.data?.email);
   return (
     <React.Fragment>
       <Dropdown
@@ -62,10 +63,10 @@ const ProfileDropdown = () => {
             />
             <span className="text-start ms-xl-2">
               <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                {userName}
+                {email?.replace("@gmail.com", "")}
               </span>
               <span className="d-none d-xl-block ms-1 fs-13 text-muted user-name-sub-text">
-                Founder
+                Admin
               </span>
             </span>
           </span>
@@ -90,12 +91,12 @@ const ProfileDropdown = () => {
               <span className="align-middle">Messages</span>
             </Link>
           </DropdownItem>
-          <DropdownItem className="p-0">
+          {/* <DropdownItem className="p-0">
             <Link to={"#"} className="dropdown-item">
               <i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i>{" "}
               <span className="align-middle">Taskboard</span>
             </Link>
-          </DropdownItem>
+          </DropdownItem> */}
           <DropdownItem className="p-0">
             <Link
               to={process.env.PUBLIC_URL + "/pages-faqs"}
@@ -106,7 +107,7 @@ const ProfileDropdown = () => {
             </Link>
           </DropdownItem>
           <div className="dropdown-divider"></div>
-          <DropdownItem className="p-0">
+          {/* <DropdownItem className="p-0">
             <Link
               to={process.env.PUBLIC_URL + "/pages-profile"}
               className="dropdown-item"
@@ -116,7 +117,7 @@ const ProfileDropdown = () => {
                 Balance : <b>$5971.67</b>
               </span>
             </Link>
-          </DropdownItem>
+          </DropdownItem> */}
           <DropdownItem className="p-0">
             <Link
               to={process.env.PUBLIC_URL + "/pages-profile-settings"}

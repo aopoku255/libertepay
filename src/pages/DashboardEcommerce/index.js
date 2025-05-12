@@ -35,13 +35,13 @@ const DashboardEcommerce = () => {
                   </Col>
                   <SalesByLocations />
                 </Row>
-                <Row>
+                {/* <Row>
                   <BestSellingProducts />
                   <TopSellers />
-                </Row>
+                </Row> */}
                 <Row>
-                  <StoreVisits />
-                  <RecentOrders />
+                  {/* <StoreVisits />
+                  <RecentOrders /> */}
                 </Row>
               </div>
             </Col>

@@ -65,3 +65,5 @@ export * from "./jobs/thunk";
 
 // API Key
 export * from "./apiKey/thunk";
+
+export * from "./settings/thunk";

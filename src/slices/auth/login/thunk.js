@@ -39,7 +39,7 @@ export const loginUser = (user, history) => async (dispatch) => {
         finallogin = JSON.parse(finallogin);
         data = finallogin;
         console.log(data);
-        if (finallogin.code === 200) {
+        if (finallogin.code === "00") {
           dispatch(loginSuccess(data));
           history("/dashboard");
         } else {

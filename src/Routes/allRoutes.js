@@ -247,7 +247,7 @@ import SettingsServices from "../pages/Pages/Profile/Settings/SettingsServices.j
 import TermsAndConditions from "../pages/Pages/Profile/Settings/TermsAndConditions.js";
 
 const authProtectedRoutes = [
-  { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
+  // { path: "/dashboard", component: <DashboardAnalytics /> },
   { path: "/dashboard-crm", component: <DashboardCrm /> },
   { path: "/dashboard", component: <DashboardEcommerce /> },
   { path: "/index", component: <DashboardEcommerce /> },

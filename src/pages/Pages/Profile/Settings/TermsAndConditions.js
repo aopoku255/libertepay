@@ -15,7 +15,9 @@ import "quill/dist/quill.snow.css";
 
 const TermsAndConditions = () => {
   const { quill, quillRef } = useQuill();
-  const [initialContent, setInitialContent] = useState("");
+  const [initialContent, setInitialContent] = useState(
+    "<h1>Privacy and Personal Data Protection Policy</h1>"
+  );
   const [currentContent, setCurrentContent] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");

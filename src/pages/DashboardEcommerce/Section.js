@@ -4,7 +4,7 @@ import Flatpickr from "react-flatpickr";
 import { useSelector } from "react-redux";
 
 const Section = (props) => {
-  const firstName = useSelector((state) => state?.Login?.user?.firstname);
+  const firstName = useSelector((state) => state?.Login?.data?.data?.name);
   return (
     <React.Fragment>
       <Row className="mb-3 pb-1">
@@ -32,12 +32,12 @@ const Section = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-auto">
+                  {/* <div className="col-auto">
                     <button type="button" className="btn btn-soft-success">
                       <i className="ri-add-circle-line align-middle me-1"></i>{" "}
                       Add Product
                     </button>
-                  </div>
+                  </div> */}
                   <div className="col-auto">
                     <button
                       type="button"

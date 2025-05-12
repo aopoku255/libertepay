@@ -226,3 +226,5 @@ export const GET_APPLICATION_LIST = "/application-list";
 
 //JOB APPLICATION
 export const GET_API_KEY = "/api-key";
+
+export const GET_SERVICES = "/admin/fetch-services";
