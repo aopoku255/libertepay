@@ -20,6 +20,11 @@ export const loginUser = (user, history) => async (dispatch) => {
       password: user.password,
     });
 
+    if (!response) {
+      dispatch(apiError({ data: "Network error" }));
+      return;
+    }
+
     const { code, msg } = response;
     if (code === "00") {
       sessionStorage.setItem("authUser", JSON.stringify(response));
@@ -33,7 +38,7 @@ export const loginUser = (user, history) => async (dispatch) => {
 
     dispatch(apiError({ data: msg }));
   } catch (error) {
-    dispatch(apiError(error));
+    dispatch(apiError({ data: "Network Error" }));
   }
 };
 

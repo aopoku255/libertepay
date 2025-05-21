@@ -76,7 +76,7 @@ const Revenue = () => {
 
         <CardHeader className="p-0 border-0 bg-light-subtle">
           <Row className="g-0 text-center">
-            <Col xs={6} sm={3}>
+            <Col xs={6} sm={4}>
               <div className="p-3 border border-dashed border-start-0">
                 <h5 className="mb-1">
                   <CountUp start={0} end={0} duration={3} separator="," />
@@ -84,7 +84,7 @@ const Revenue = () => {
                 <p className="text-muted mb-0">Transactions</p>
               </div>
             </Col>
-            <Col xs={6} sm={3}>
+            {/* <Col xs={6} sm={3}>
               <div className="p-3 border border-dashed border-start-0">
                 <h5 className="mb-1">
                   <CountUp
@@ -98,7 +98,7 @@ const Revenue = () => {
                 </h5>
                 <p className="text-muted mb-0">Earnings</p>
               </div>
-            </Col>
+            </Col> */}
             <Col xs={6} sm={3}>
               <div className="p-3 border border-dashed border-start-0">
                 <h5 className="mb-1">

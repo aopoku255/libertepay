@@ -512,7 +512,7 @@ const EcommerceCustomers = () => {
               return (
                 <span className="badge text-uppercase bg-info-subtle text-info">
                   {" "}
-                  {cell.value}{" "}
+                  {cell.value === "Y" ? "Active" : "Inactive"}{" "}
                 </span>
               );
           }
@@ -605,7 +605,7 @@ const EcommerceCustomers = () => {
         />
 
         <Container fluid>
-          <BreadCrumb title="Customers" pageTitle="Ecommerce" />
+          <BreadCrumb title="Customers" pageTitle="Dashboard" />
           <Row>
             <Col lg={12}>
               <Card id="customerList">

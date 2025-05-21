@@ -670,24 +670,24 @@ const Navdata = () => {
       parentId: "pages",
       icon: "las la-users",
     },
-    {
-      id: "refunds",
-      label: "Refunds",
-      link: "/dashboard-crm",
-      parentId: "pages",
-      icon: "las la-undo-alt",
-    },
+    // {
+    //   id: "refunds",
+    //   label: "Refunds",
+    //   link: "/dashboard-crm",
+    //   parentId: "pages",
+    //   icon: "las la-undo-alt",
+    // },
     {
       label: "SYSTEM",
       isHeader: true,
     },
-    {
-      id: "logs",
-      label: "Audit Logs",
-      link: "/dashboard-crm",
-      parentId: "pages",
-      icon: "las la-eye",
-    },
+    // {
+    //   id: "logs",
+    //   label: "Audit Logs",
+    //   link: "/dashboard-crm",
+    //   parentId: "pages",
+    //   icon: "las la-eye",
+    // },
     // {
     //   id: "settings",
     //   label: "Settings",

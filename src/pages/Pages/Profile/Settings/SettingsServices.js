@@ -37,6 +37,7 @@ const SettingsServices = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedProvider, setSelectedProvider] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const validation = useFormik({
     enableReinitialize: true,
@@ -69,11 +70,13 @@ const SettingsServices = () => {
       formData.append("type", newService.type);
       formData.append("image", newService.image);
       formData.append("secrete_key", newService.secrete_key);
+      setLoading(true);
 
       dispatch(createServices(formData)).then(() => {
         dispatch(getServices()); // refetch list
         validation.resetForm();
         setIsOpen(false); // optionally close the drawer
+        setLoading(false);
       });
 
       validation.resetForm();
@@ -396,7 +399,14 @@ const SettingsServices = () => {
                       className="btn btn-primary w-100 mt-4"
                       onClick={validation.handleSubmit}
                     >
-                      Submit
+                      {loading ? (
+                        <span
+                          className="spinner-border spinner-border-sm me-2"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      ) : null}
+                      Add service
                     </button>
                   </div>
                 </div>
