@@ -228,3 +228,17 @@ export const GET_APPLICATION_LIST = "/application-list";
 export const GET_API_KEY = "/api-key";
 
 export const GET_SERVICES = "/admin/fetch-services";
+
+export const CREATE_SERVICES = "/admin/add-services";
+
+export const GET_TERMS_AND_CONDITIONS = "/terms/";
+
+export const CREATE_TERMS_AND_CONDITIONS = "/terms/";
+
+export const GET_SMS_CONFIG = "/settings/sms-provider/";
+
+export const GET_MY_TRANSACTIONS = "/transactions/";
+
+export const UPDATE_SMS_CONFIG = "/settings/sms-provider/active";
+
+export const UPDATE_SERVICES = "/admin/services/toggle-status";

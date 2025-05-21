@@ -12,11 +12,24 @@ import {
 import { useQuill } from "react-quilljs";
 import axios from "axios";
 import "quill/dist/quill.snow.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createTermsAndConditions,
+  getTermsAndConditions,
+} from "../../../../slices/thunks";
+import { ToastContainer } from "react-toastify";
 
 const TermsAndConditions = () => {
   const { quill, quillRef } = useQuill();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTermsAndConditions());
+  }, [dispatch]);
+  const termsAndConditions = useSelector(
+    (state) => state.Settings.termsandconditions?.details
+  );
   const [initialContent, setInitialContent] = useState(
-    "<h1>Privacy and Personal Data Protection Policy</h1>"
+    termsAndConditions || ""
   );
   const [currentContent, setCurrentContent] = useState("");
   const [error, setError] = useState("");
@@ -43,6 +56,8 @@ const TermsAndConditions = () => {
       return;
     }
 
+    dispatch(createTermsAndConditions(currentContent.toString()));
+
     // try {
     //   setLoading(true);
     //   // Replace with your actual backend endpoint
@@ -54,8 +69,6 @@ const TermsAndConditions = () => {
     // } finally {
     //   setLoading(false);
     // }
-
-    console.log(currentContent);
   };
 
   const handleCancel = () => {
@@ -69,6 +82,7 @@ const TermsAndConditions = () => {
 
   return (
     <div className="page-content">
+      <ToastContainer autoClose={3000} position="bottom-right" />
       <Row className="mt-2 d-flex justify-content-center align-items-center">
         <Col lg={8}>
           <Card>

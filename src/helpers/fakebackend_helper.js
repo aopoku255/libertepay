@@ -423,3 +423,20 @@ export const getAPIKey = () => api.get(url.GET_API_KEY);
 
 //SETTINGS
 export const getServices = () => api.get(url.GET_SERVICES);
+
+export const createServices = (data) => api.create(url.CREATE_SERVICES, data);
+
+export const getTermsAndConditions = () =>
+  api.get(url.GET_TERMS_AND_CONDITIONS);
+
+export const createTermsAndConditions = (data) =>
+  api.create(url.CREATE_TERMS_AND_CONDITIONS, data);
+
+export const getSMSConfig = () => api.get(url.GET_SMS_CONFIG);
+
+export const getMyTransactions = () => api.get(url.GET_MY_TRANSACTIONS);
+
+export const updateSMSConfig = (data) => api.put(url.UPDATE_SMS_CONFIG, data);
+
+export const updateServices = (data, id) =>
+  api.put(`${url.UPDATE_SERVICES}/${id}`, data);

@@ -51,9 +51,9 @@ const EcommerceCustomers = () => {
 
   const selectLayoutState = (state) => state.Ecommerce;
   const selectLayoutProperties = createSelector(selectLayoutState, (state) => ({
-    customers: state.customers,
-    isCustomerSuccess: state.isCustomerSuccess,
-    error: state.error,
+    customers: state?.customers,
+    isCustomerSuccess: state?.isCustomerSuccess,
+    error: state?.error,
   }));
   // Inside your component
   const { customers, isCustomerSuccess, error } = useSelector(

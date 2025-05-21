@@ -47,6 +47,7 @@ const ProfileDropdown = () => {
 
   const firstName = useSelector((state) => state?.Login?.data?.data?.name);
   const email = useSelector((state) => state?.Login?.data?.data?.email);
+  const adminType = useSelector((state) => state?.Login?.data?.data?.role_id);
   return (
     <React.Fragment>
       <Dropdown
@@ -66,7 +67,11 @@ const ProfileDropdown = () => {
                 {email?.replace("@gmail.com", "")}
               </span>
               <span className="d-none d-xl-block ms-1 fs-13 text-muted user-name-sub-text">
-                Admin
+                {adminType === "00"
+                  ? "Super Admin"
+                  : adminType === "01"
+                  ? "Maker"
+                  : "Checker"}
               </span>
             </span>
           </span>
@@ -143,6 +148,12 @@ const ProfileDropdown = () => {
             <Link
               to={process.env.PUBLIC_URL + "/logout"}
               className="dropdown-item"
+              onClick={() => {
+                sessionStorage.removeItem("authUser");
+                sessionStorage.removeItem("userData");
+                sessionStorage.removeItem("userToken");
+                window.location.href = process.env.PUBLIC_URL + "/login";
+              }}
             >
               <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>{" "}
               <span className="align-middle" data-key="t-logout">

@@ -4,13 +4,18 @@ import { api } from "../config";
 // default
 axios.defaults.baseURL = api.API_URL;
 // content type
-axios.defaults.headers.post["Content-Type"] = "application/json";
-
-// content type
-const token = JSON.parse(sessionStorage.getItem("authUser"))
-  ? JSON.parse(sessionStorage.getItem("authUser")).data.access_token
-  : null;
-if (token) axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+// Add this in your axios config file
+axios.interceptors.request.use(
+  (config) => {
+    const authUser = JSON.parse(sessionStorage.getItem("authUser"));
+    const token = authUser?.data?.access_token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 // intercepting to capture errors
 axios.interceptors.response.use(
@@ -18,9 +23,10 @@ axios.interceptors.response.use(
     return response.data ? response.data : response;
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
     let message;
-    switch (error.status) {
+    const status = error?.response?.status;
+
+    switch (status) {
       case 500:
         message = "Internal Server Error";
         break;
@@ -31,7 +37,10 @@ axios.interceptors.response.use(
         message = "Sorry! the data you are looking for could not be found";
         break;
       default:
-        message = error.message || error;
+        message =
+          error?.response?.data?.message ||
+          error.message ||
+          "An error occurred";
     }
     return Promise.reject(message);
   }
@@ -52,7 +61,7 @@ class APIClient {
   //  get = (url, params) => {
   //   return axios.get(url, params);
   // };
-  get = (url, params) => {
+  get = (url, params, headers) => {
     let response;
 
     let paramKeys = [];
@@ -65,9 +74,9 @@ class APIClient {
 
       const queryString =
         paramKeys && paramKeys.length ? paramKeys.join("&") : "";
-      response = axios.get(`${url}?${queryString}`, params);
+      response = axios.get(`${url}?${queryString}`, params, headers);
     } else {
-      response = axios.get(`${url}`, params);
+      response = axios.get(`${url}`, params, headers);
     }
 
     return response;
@@ -75,8 +84,8 @@ class APIClient {
   /**
    * post given data to url
    */
-  create = (url, data) => {
-    return axios.post(url, data);
+  create = (url, data, headers) => {
+    return axios.post(url, data, headers);
   };
   /**
    * Updates data

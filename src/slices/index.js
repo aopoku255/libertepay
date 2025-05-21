@@ -79,7 +79,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storageSession from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 

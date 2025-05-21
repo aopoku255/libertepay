@@ -313,7 +313,7 @@ const authProtectedRoutes = [
   { path: "/apps-tickets-details", component: <TicketsDetails /> },
 
   //transactions
-  { path: "/apps-crypto-transactions", component: <Transactions /> },
+  { path: "/transactions", component: <Transactions /> },
   { path: "/apps-crypto-buy-sell", component: <BuySell /> },
   { path: "/apps-crypto-orders", component: <CryproOrder /> },
   { path: "/apps-crypto-wallet", component: <MyWallet /> },

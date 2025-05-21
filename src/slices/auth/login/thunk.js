@@ -14,42 +14,24 @@ import {
 
 export const loginUser = (user, history) => async (dispatch) => {
   try {
-    let response;
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      let fireBaseBackend = getFirebaseBackend();
-      response = fireBaseBackend.loginUser(user.email, user.password);
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      response = postJwtLogin({
-        email: user.email,
-        password: user.password,
-      });
-    } else if (process.env.REACT_APP_DEFAULTAUTH) {
-      response = postFakeLogin({
-        email: user.email,
-        password: user.password,
-      });
+    // Call the fake login API
+    const response = await postFakeLogin({
+      email: user.email,
+      password: user.password,
+    });
+
+    const { code, msg } = response;
+    if (code === "00") {
+      sessionStorage.setItem("authUser", JSON.stringify(response));
+      dispatch(loginSuccess(response));
+      history("/dashboard");
     }
 
-    var data = await response;
+    // Store response temporarily in session
 
-    if (data) {
-      sessionStorage.setItem("authUser", JSON.stringify(data));
-      if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-        var finallogin = JSON.stringify(data);
-        finallogin = JSON.parse(finallogin);
-        data = finallogin;
-        console.log(data);
-        if (finallogin.code === "00") {
-          dispatch(loginSuccess(data));
-          history("/dashboard");
-        } else {
-          dispatch(apiError(finallogin));
-        }
-      } else {
-        dispatch(loginSuccess(data));
-        history("/dashboard");
-      }
-    }
+    // Proceed based on auth method
+
+    dispatch(apiError({ data: msg }));
   } catch (error) {
     dispatch(apiError(error));
   }

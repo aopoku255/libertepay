@@ -659,7 +659,7 @@ const Navdata = () => {
     {
       id: "transactions",
       label: "Transactions",
-      link: "/dashboard-crm",
+      link: "/transactions",
       parentId: "pages",
       icon: "las la-credit-card",
     },
