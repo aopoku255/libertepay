@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -18,42 +18,52 @@ import logoLight from "../../../assets/images/logo-light.png";
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { userResetPassword } from "../../../slices/thunks";
 
-const BasicPasswCreate = () => {
-  document.title =
-    "Create New Password | Velzon - React Admin & Dashboard Template";
+const BasicPasswCreate = (props) => {
+  document.title = "Create New Password ";
 
   const [passwordShow, setPasswordShow] = useState(false);
   const [confrimPasswordShow, setConfrimPasswordShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const param = useParams();
+  const navigate = useNavigate();
 
   const validation = useFormik({
     enableReinitialize: true,
 
     initialValues: {
       password: "",
-      confrim_password: "",
+      confirm_password: "",
     },
+
     validationSchema: Yup.object({
       password: Yup.string()
         .min(8, "Password must be at least 8 characters")
-        .matches(RegExp("(.*[a-z].*)"), "At least lowercase letter")
-        .matches(RegExp("(.*[A-Z].*)"), "At least uppercase letter")
-        .matches(RegExp("(.*[0-9].*)"), "At least one number")
-        .required("This field is required"),
-      confrim_password: Yup.string()
-        .when("password", {
-          is: (val) => (val && val.length > 0 ? true : false),
-          then: Yup.string().oneOf(
-            [Yup.ref("password")],
-            "Both password need to be the same"
-          ),
-        })
-        .required("Confirm Password Required"),
+        .matches(/[a-z]/, "At least one lowercase letter")
+        .matches(/[A-Z]/, "At least one uppercase letter")
+        .matches(/[0-9]/, "At least one number")
+        .required("Password is required"),
+
+      confirm_password: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Confirm Password is required"),
     }),
+
     onSubmit: (values) => {
-      // console.log(values);
+      const newValues = {
+        token: param?.token,
+        new_password: values.confirm_password,
+      };
+      setLoading(true);
+
+      dispatch(userResetPassword(newValues, navigate));
+      setLoading(false);
     },
   });
+
   return (
     <ParticlesAuth>
       <div className="auth-page-content">
@@ -144,21 +154,21 @@ const BasicPasswCreate = () => {
                             className="form-control pe-5 password-input"
                             placeholder="Confirm password"
                             id="confirm-password-input"
-                            name="confrim_password"
-                            value={validation.values.confrim_password}
+                            name="confirm_password"
+                            value={validation.values.confirm_password}
                             onBlur={validation.handleBlur}
                             onChange={validation.handleChange}
                             invalid={
-                              validation.errors.confrim_password &&
-                              validation.touched.confrim_password
+                              validation.errors.confirm_password &&
+                              validation.touched.confirm_password
                                 ? true
                                 : false
                             }
                           />
-                          {validation.errors.confrim_password &&
-                          validation.touched.confrim_password ? (
+                          {validation.errors.confirm_password &&
+                          validation.touched.confirm_password ? (
                             <FormFeedback type="invalid">
-                              {validation.errors.confrim_password}
+                              {validation.errors.confirm_password}
                             </FormFeedback>
                           ) : null}
                           <Button
@@ -215,7 +225,10 @@ const BasicPasswCreate = () => {
                           type="submit"
                           style={{ backgroundColor: "#111EC6" }}
                         >
-                          Reset Password
+                          {loading ? (
+                            <i className="bx bx-loader bx-spin font-size-16 align-middle me-2"></i>
+                          ) : null}
+                          Create Password
                         </Button>
                       </div>
                     </Form>

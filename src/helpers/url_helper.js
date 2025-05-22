@@ -4,7 +4,8 @@ export const POST_FAKE_REGISTER = "/auth/signup";
 //LOGIN
 export const POST_FAKE_LOGIN = "/auth/admin/login";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
-export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
+export const POST_FAKE_PASSWORD_FORGET = "/auth/admin/request-password-reset";
+export const POST_FAKE_PASSWORD_RESET = "/auth/admin/reset-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
 
@@ -196,6 +197,7 @@ export const DELETE_PROJECT = "/delete/project";
 export const GET_TEAMDATA = "/teamData";
 export const DELETE_TEAMDATA = "/delete/teamData";
 export const ADD_NEW_TEAMDATA = "/add/teamData";
+export const ADD_NEW_ADMIN = "/auth/admin/create";
 export const UPDATE_TEAMDATA = "/update/teamData";
 
 // File Manager

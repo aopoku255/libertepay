@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Row,
   Col,
@@ -16,7 +16,7 @@ import {
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import withRouter from "../../Components/Common/withRouter";
 
 // Formik Validation
@@ -31,11 +31,14 @@ import { userForgetPassword } from "../../slices/thunks";
 import logoLight from "../../assets/images/logo-light.png";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
 import { createSelector } from "reselect";
+import { resetError } from "../../slices/auth/forgetpwd/reducer";
 
 const ForgetPasswordPage = (props) => {
-  document.title = "Reset Password | Velzon - React Admin & Dashboard Template";
+  document.title = "Reset Password";
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = React.useState(false);
 
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
@@ -48,7 +51,9 @@ const ForgetPasswordPage = (props) => {
       email: Yup.string().required("Please Enter Your Email"),
     }),
     onSubmit: (values) => {
-      dispatch(userForgetPassword(values, props.history));
+      setLoading(true);
+      dispatch(userForgetPassword(values, navigate));
+      setLoading(false);
     },
   });
 
@@ -59,6 +64,14 @@ const ForgetPasswordPage = (props) => {
   }));
   // Inside your component
   const { forgetError, forgetSuccessMsg } = useSelector(selectLayoutProperties);
+
+  useEffect(() => {
+    if (forgetError || forgetSuccessMsg) {
+      setTimeout(() => {
+        dispatch(resetError());
+      }, 3000);
+    }
+  }, [dispatch, forgetError, forgetSuccessMsg]);
 
   return (
     <ParticlesAuth>
@@ -103,11 +116,15 @@ const ForgetPasswordPage = (props) => {
                     Enter your email and instructions will be sent to you!
                   </Alert>
                   <div className="p-2">
-                    {forgetError && forgetError ? (
+                    {forgetError ? (
                       <Alert color="danger" style={{ marginTop: "13px" }}>
-                        {forgetError}
+                        {typeof forgetError === "string"
+                          ? forgetError
+                          : forgetError.message ||
+                            "An unexpected error occurred"}
                       </Alert>
                     ) : null}
+
                     {forgetSuccessMsg ? (
                       <Alert color="success" style={{ marginTop: "13px" }}>
                         {forgetSuccessMsg}
@@ -149,6 +166,12 @@ const ForgetPasswordPage = (props) => {
                           type="submit"
                           style={{ backgroundColor: "#111EC6" }}
                         >
+                          {loading ? (
+                            <div
+                              className="spinner-border spinner-border-sm text-light me-2"
+                              role="status"
+                            ></div>
+                          ) : null}
                           Send Reset Link
                         </button>
                       </div>
@@ -178,7 +201,7 @@ const ForgetPasswordPage = (props) => {
 };
 
 ForgetPasswordPage.propTypes = {
-  history: PropTypes.object,
+  history: PropTypes.string,
 };
 
 export default withRouter(ForgetPasswordPage);

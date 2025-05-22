@@ -740,6 +740,12 @@ const Navdata = () => {
           link: "/terms-and-conditions",
           parentId: "dashboard",
         },
+        {
+          id: "createadmin",
+          label: "Add Admin",
+          link: "/create-admin",
+          parentId: "dashboard",
+        },
         // {
         //   id: "crm",
         //   label: "CRM",

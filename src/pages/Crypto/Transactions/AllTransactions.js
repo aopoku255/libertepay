@@ -146,9 +146,19 @@ const AllTransactions = () => {
         Header: "Status",
         accessor: "status",
         filterable: false,
-        Cell: (cellProps) => {
-          return <Status {...cellProps} />;
-        },
+        Cell: (transaction) => <TypeCol {...transaction} />,
+      },
+      {
+        Header: "Transaction Status",
+        accessor: "transaction_status",
+        filterable: false,
+        Cell: (transaction) => <TypeCol {...transaction} />,
+      },
+      {
+        Header: "Transaction Action",
+        accessor: "transaction_action",
+        filterable: false,
+        Cell: (transaction) => <TypeCol {...transaction} />,
       },
     ],
     []
@@ -156,7 +166,7 @@ const AllTransactions = () => {
 
   return (
     <React.Fragment>
-      <Row className="align-items-center mb-4 g-3">
+      {/* <Row className="align-items-center mb-4 g-3">
         <Col sm={2}>
           <div className="d-flex align-items-center gap-2">
             <span className="text-muted flex-shrink-0">Sort by: </span>
@@ -197,7 +207,7 @@ const AllTransactions = () => {
             </Link>
           </div>
         </div>
-      </Row>
+      </Row> */}
 
       <Card>
         <CardHeader>
@@ -254,8 +264,10 @@ const AllTransactions = () => {
               type: item?.transaction_type,
               amount: item?.transaction_amount,
               amount1: item?.transaction_amount,
-              status: item?.transaction_status,
+              status: item?.status,
               category: "BTC",
+              transaction_status: item?.transaction_status,
+              transaction_action: item?.transaction_action,
             }))}
             isGlobalFilter={false}
             isAddUserList={false}

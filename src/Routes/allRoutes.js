@@ -432,7 +432,7 @@ const authProtectedRoutes = [
   { path: "/services", component: <SettingsServices /> },
   { path: "/sms-provider-config", component: <SMSConfig /> },
   { path: "/terms-and-conditions", component: <TermsAndConditions /> },
-  { path: "/pages-team", component: <Team /> },
+  { path: "/create-admin", component: <Team /> },
   { path: "/pages-timeline", component: <Timeline /> },
   { path: "/pages-faqs", component: <Faqs /> },
   { path: "/pages-gallery", component: <Gallery /> },
@@ -487,7 +487,7 @@ const publicRoutes = [
   { path: "/auth-lockscreen-cover", component: <CoverLockScreen /> },
   { path: "/auth-logout-basic", component: <BasicLogout /> },
   { path: "/auth-logout-cover", component: <CoverLogout /> },
-  { path: "/auth-success-msg-basic", component: <BasicSuccessMsg /> },
+  { path: "/password-reset-success", component: <BasicSuccessMsg /> },
   { path: "/auth-success-msg-cover", component: <CoverSuccessMsg /> },
   { path: "/verify-otp", component: <BasicTwosVerify /> },
   // { path: "/auth-twostep-basic", component: <BasicTwosVerify /> },
@@ -503,7 +503,7 @@ const publicRoutes = [
   { path: "/nft-landing", component: <NFTLanding /> },
   { path: "/job-landing", component: <JobLanding /> },
 
-  { path: "/auth-pass-change-basic", component: <BasicPasswCreate /> },
+  { path: "/change-password/:token", component: <BasicPasswCreate /> },
   { path: "/auth-pass-change-cover", component: <CoverPasswCreate /> },
   { path: "/auth-offline", component: <Offlinepage /> },
 ];

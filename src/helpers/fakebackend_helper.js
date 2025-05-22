@@ -27,6 +27,9 @@ export const postFakeLogin = (data) => api.create(url.POST_FAKE_LOGIN, data);
 export const postFakeForgetPwd = (data) =>
   api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
+export const postFakeResetPwd = (data) =>
+  api.create(url.POST_FAKE_PASSWORD_RESET, data);
+
 // Edit profile
 export const postJwtProfile = (data) =>
   api.create(url.POST_EDIT_JWT_PROFILE, data);
@@ -385,6 +388,7 @@ export const getTeamData = (team) => api.get(url.GET_TEAMDATA, team);
 export const deleteTeamData = (team) =>
   api.delete(url.DELETE_TEAMDATA, { headers: { team } });
 export const addTeamData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);
+export const addAdmin = (admin) => api.create(url.ADD_NEW_ADMIN, admin);
 export const updateTeamData = (team) => api.put(url.UPDATE_TEAMDATA, team);
 
 // File Manager
