@@ -37,6 +37,7 @@ import { useSelector, useDispatch } from "react-redux";
 //import action
 import {
   getTeamData as onGetTeamData,
+  getAdmin as onGetAdmin,
   deleteTeamData as onDeleteTeamData,
   addTeamData as onAddTeamData,
   addAdmin as onAddAdmin,
@@ -57,8 +58,8 @@ const Team = () => {
   const dispatch = useDispatch();
 
   const selectteamData = createSelector(
-    (state) => state.Team.teamData,
-    (teamData) => teamData
+    (state) => state.Team.admin,
+    (admin) => admin
   );
   // Inside your component
   const teamData = useSelector(selectteamData);
@@ -73,7 +74,7 @@ const Team = () => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    dispatch(onGetTeamData());
+    dispatch(onGetAdmin());
   }, [dispatch]);
 
   useEffect(() => {
@@ -238,7 +239,9 @@ const Team = () => {
         };
         console.log(newTeamData);
         // save new TeamData
-        dispatch(onAddAdmin(newTeamData));
+        dispatch(onAddAdmin(newTeamData)).then(() => {
+          dispatch(onGetAdmin());
+        });
         // validation.resetForm();
       }
       toggle();
@@ -344,17 +347,7 @@ const Team = () => {
                           <Row className="align-items-center team-row">
                             <Col className="team-settings">
                               <Row>
-                                <Col>
-                                  <div className="flex-shrink-0 me-2">
-                                    <button
-                                      type="button"
-                                      className="btn btn-light btn-icon rounded-circle btn-sm favourite-btn"
-                                      onClick={(e) => favouriteBtn(e.target)}
-                                    >
-                                      <i className="ri-star-fill fs-14"></i>
-                                    </button>
-                                  </div>
-                                </Col>
+                                <Col></Col>
                                 <UncontrolledDropdown
                                   direction="start"
                                   className="col text-end"
@@ -423,25 +416,16 @@ const Team = () => {
                                 </div>
                               </div>
                             </Col>
-                            <Col lg={4} className="col">
-                              <Row className="text-muted text-center">
-                                <Col
-                                  xs={6}
-                                  className="border-end border-end-dashed"
-                                >
-                                  <h5 className="mb-1">{item.projectCount}</h5>
-                                  <p className="text-muted mb-0">Projects</p>
-                                </Col>
-                                <Col xs={6}>
-                                  <h5 className="mb-1">{item.taskCount}</h5>
-                                  <p className="text-muted mb-0">Tasks</p>
-                                </Col>
-                              </Row>
-                            </Col>
+                            <Col lg={4} className="col"></Col>
                             <Col lg={2} className="col">
                               <div className="text-end">
                                 <Link
-                                  to="/pages-profile"
+                                  onClick={() => {
+                                    setIsOpen(!isOpen);
+                                    setSideBar(item);
+                                    setSideBar(item);
+                                  }}
+                                  to="#"
                                   className="btn btn-light view-btn"
                                 >
                                   View Profile
@@ -860,10 +844,14 @@ const Team = () => {
                           </Link>
                         </h5>
                         <p className="text-muted">
-                          {sideBar.designation || "Team Leader & HR"}
+                          {sideBar?.role_id === "00"
+                            ? "Super Admin"
+                            : sideBar?.role_id === "01"
+                            ? "Maker"
+                            : "Checker"}
                         </p>
                       </div>
-                      <div className="hstack gap-2 justify-content-center mt-4">
+                      {/* <div className="hstack gap-2 justify-content-center mt-4">
                         <div className="avatar-xs">
                           <Link
                             to="#"
@@ -896,9 +884,9 @@ const Team = () => {
                             <i className="ri-dribbble-fill"></i>
                           </Link>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
-                    <Row className="g-0 text-center">
+                    {/* <Row className="g-0 text-center">
                       <Col xs={6}>
                         <div className="p-3 border border-dashed border-start-0">
                           <h5 className="mb-1">
@@ -913,89 +901,24 @@ const Team = () => {
                           <p className="text-muted mb-0">Tasks</p>
                         </div>
                       </Col>
-                    </Row>
+                    </Row> */}
                     <div className="p-3">
                       <h5 className="fs-15 mb-3">Personal Details</h5>
                       <div className="mb-3">
                         <p className="text-muted text-uppercase fw-semibold fs-12 mb-2">
                           Number
                         </p>
-                        <h6>+(256) 2451 8974</h6>
+                        <h6>{sideBar?.phone_number}</h6>
                       </div>
                       <div className="mb-3">
                         <p className="text-muted text-uppercase fw-semibold fs-12 mb-2">
                           Email
                         </p>
-                        <h6>nancymartino@email.com</h6>
-                      </div>
-                      <div>
-                        <p className="text-muted text-uppercase fw-semibold fs-12 mb-2">
-                          Location
-                        </p>
-                        <h6 className="mb-0">Carson City - USA</h6>
-                      </div>
-                    </div>
-                    <div className="p-3 border-top">
-                      <h5 className="fs-15 mb-4">File Manager</h5>
-                      <div className="d-flex mb-3">
-                        <div className="flex-shrink-0 avatar-xs">
-                          <div className="avatar-title bg-danger-subtle text-danger rounded fs-16">
-                            <i className="ri-image-2-line"></i>
-                          </div>
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                          <h6 className="mb-1">
-                            <Link to="#">Images</Link>
-                          </h6>
-                          <p className="text-muted mb-0">4469 Files</p>
-                        </div>
-                        <div className="text-muted">12 GB</div>
-                      </div>
-                      <div className="d-flex mb-3">
-                        <div className="flex-shrink-0 avatar-xs">
-                          <div className="avatar-title bg-secondary-subtle text-secondary rounded fs-16">
-                            <i className="ri-file-zip-line"></i>
-                          </div>
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                          <h6 className="mb-1">
-                            <Link to="#">Documents</Link>
-                          </h6>
-                          <p className="text-muted mb-0">46 Files</p>
-                        </div>
-                        <div className="text-muted">3.46 GB</div>
-                      </div>
-                      <div className="d-flex mb-3">
-                        <div className="flex-shrink-0 avatar-xs">
-                          <div className="avatar-title bg-success-subtle text-success rounded fs-16">
-                            <i className="ri-live-line"></i>
-                          </div>
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                          <h6 className="mb-1">
-                            <Link to="#">Media</Link>
-                          </h6>
-                          <p className="text-muted mb-0">124 Files</p>
-                        </div>
-                        <div className="text-muted">4.3 GB</div>
-                      </div>
-                      <div className="d-flex">
-                        <div className="flex-shrink-0 avatar-xs">
-                          <div className="avatar-title bg-primary-subtle text-primary rounded fs-16">
-                            <i className="ri-error-warning-line"></i>
-                          </div>
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                          <h6 className="mb-1">
-                            <Link to="#">Others</Link>
-                          </h6>
-                          <p className="text-muted mb-0">18 Files</p>
-                        </div>
-                        <div className="text-muted">846 MB</div>
+                        <h6>{sideBar?.email}</h6>
                       </div>
                     </div>
                   </OffcanvasBody>
-                  <div className="offcanvas-foorter border p-3 hstack gap-3 text-center position-relative">
+                  {/* <div className="offcanvas-foorter border p-3 hstack gap-3 text-center position-relative">
                     <button className="btn btn-light w-100">
                       <i className="ri-question-answer-fill align-bottom ms-1"></i>{" "}
                       Send Message
@@ -1004,7 +927,7 @@ const Team = () => {
                       <i className="ri-user-3-fill align-bottom ms-1"></i> View
                       Profile
                     </Link>
-                  </div>
+                  </div> */}
                 </Offcanvas>
               </div>
               <div

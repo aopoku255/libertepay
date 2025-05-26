@@ -5,10 +5,13 @@ import {
   updateTeamData,
   deleteTeamData,
   addAdmin,
+  getAdmin,
 } from "./thunk";
 export const initialState = {
   teamData: [],
+  admin: [],
   error: {},
+  adminError: null,
 };
 
 const TeamSlice = createSlice({
@@ -25,6 +28,12 @@ const TeamSlice = createSlice({
     });
     builder.addCase(getTeamData.rejected, (state, action) => {
       state.error = action.payload.error || null;
+    });
+    builder.addCase(getAdmin.fulfilled, (state, action) => {
+      state.admin = action.payload;
+    });
+    builder.addCase(getAdmin.rejected, (state, action) => {
+      state.adminError = action.payload.error || null;
     });
     builder.addCase(addTeamData.fulfilled, (state, action) => {
       state.teamData.push(action.payload);

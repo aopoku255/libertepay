@@ -35,10 +35,11 @@ export const loginUser = (user, history) => async (dispatch) => {
     // Store response temporarily in session
 
     // Proceed based on auth method
+    console.log(response);
 
     dispatch(apiError({ data: msg }));
   } catch (error) {
-    dispatch(apiError({ data: "Network Error" }));
+    dispatch(apiError({ data: error?.msg || "Network Error" }));
   }
 };
 

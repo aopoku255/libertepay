@@ -665,7 +665,7 @@ const EcommerceCustomers = () => {
                           email: customer?.email,
                         }))}
                         isGlobalFilter={true}
-                        customPageSize={5}
+                        customPageSize={10}
                         className="custom-header-css"
                         theadClass="table-light text-muted"
                         handleCustomerClick={handleCustomerClicks}

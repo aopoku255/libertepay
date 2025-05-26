@@ -46,6 +46,9 @@ export const postJwtRegister = (url, data) => {
         case 404:
           message = "Sorry! the page you are looking for could not be found";
           break;
+        case 403:
+          message = "Forbidden! You don't have permission to access this page";
+          break;
         case 500:
           message =
             "Sorry! something went wrong, please contact our support team";
@@ -385,6 +388,7 @@ export const deleteProjectList = (project) =>
 
 // Pages > Team
 export const getTeamData = (team) => api.get(url.GET_TEAMDATA, team);
+export const getAdmin = (admin) => api.get(url.GET_ADMIN, admin);
 export const deleteTeamData = (team) =>
   api.delete(url.DELETE_TEAMDATA, { headers: { team } });
 export const addTeamData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);

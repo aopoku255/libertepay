@@ -217,7 +217,7 @@ const Login = (props) => {
                           </div>
                         </div>
 
-                        <div className="form-check">
+                        {/* <div className="form-check">
                           <Input
                             className="form-check-input"
                             type="checkbox"
@@ -230,7 +230,7 @@ const Login = (props) => {
                           >
                             Remember me
                           </Label>
-                        </div>
+                        </div> */}
 
                         <div className="mt-4">
                           <Button

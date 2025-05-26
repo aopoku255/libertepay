@@ -195,6 +195,7 @@ export const DELETE_PROJECT = "/delete/project";
 
 // Pages > Team
 export const GET_TEAMDATA = "/teamData";
+export const GET_ADMIN = "/admins/";
 export const DELETE_TEAMDATA = "/delete/teamData";
 export const ADD_NEW_TEAMDATA = "/add/teamData";
 export const ADD_NEW_ADMIN = "/auth/admin/create";

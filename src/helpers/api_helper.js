@@ -34,7 +34,7 @@ axios.interceptors.response.use(
         message = "Invalid credentials";
         break;
       case 404:
-        message = "Sorry! the data you are looking for could not be found";
+        message = error?.response?.data;
         break;
       default:
         message =

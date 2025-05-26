@@ -7,6 +7,7 @@ import {
   getTeamData as getTeamDataApi,
   addTeamData as addTeamDataApi,
   addAdmin as addAdminApi,
+  getAdmin as getAdminApi,
   updateTeamData as updateTeamDataApi,
   deleteTeamData as deleteTeamDataApi,
 } from "../../helpers/fakebackend_helper";
@@ -16,6 +17,17 @@ export const getTeamData = createAsyncThunk("team/getTeamData", async () => {
     const response = getTeamDataApi();
     return response;
   } catch (error) {
+    return error;
+  }
+});
+
+export const getAdmin = createAsyncThunk("team/getAdmin", async () => {
+  try {
+    const response = await getAdminApi();
+    console.log(response?.data);
+    return response?.data;
+  } catch (error) {
+    console.error("Error fetching admin data:", error);
     return error;
   }
 });
